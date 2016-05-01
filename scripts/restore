@@ -1,9 +1,10 @@
 #!/bin/bash
-APP=${!#}
 
 # The parameter $1 is the backup directory location dedicated to the app
 BACKUP_DIR=$1
 
+# The parameter $2 is the id of the app instance ex: strut__2
+APP=$2
 
 domain=$(sudo yunohost app setting $APP domain)
 path=$(sudo yunohost app setting $APP path)
@@ -23,7 +24,7 @@ if [ -d $final_path ]; then
     echo "There is already a directory: $final_path " | sudo tee /dev/stderr
     exit 1
 fi
-sudo cp -a "${BACKUP_DIR}/www" $final_path
+sudo cp -a "${BACKUP_DIR}/www" $final_path 
 sudo chown -R www-data: $final_path
 
 # Restore the conf files
@@ -38,9 +39,9 @@ sudo cp -a "${BACKUP_DIR}/conf/nginx.conf" $conf
 sudo service nginx reload
 
 # Set ssowat config
-sudo yunohost app setting $APP skipped_uris -v "/"
+sudo yunohost app setting $APP skipped_uris -v "/" 
 if [ "$public_site" = "No" ];
-then
-	sudo yunohost app setting $APP protected_uris -v "/index.html,/scripts"
+then   
+	sudo yunohost app setting $APP protected_uris -v "/index.html,/scripts" 
 fi
 sudo yunohost app ssowatconf
