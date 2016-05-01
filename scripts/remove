@@ -1,0 +1,8 @@
+#!/bin/bash
+
+APP=${!#}
+
+domain=$(sudo yunohost app setting $APP domain)
+
+sudo rm -rf /var/www/$APP
+sudo rm -f /etc/nginx/conf.d/$domain.d/$APP.conf

@@ -1,0 +1,47 @@
+{
+    "name": "Strut",
+    "id": "strut",
+    "description": {
+        "en": "Strut is a slide editor creating impress.js presentations.",
+        "fr": "Strut est un éditeur de slide permetant de créer des présentation impress.js."
+    },
+    "maintainer": {
+        "name": "zamentur",
+        "email": "valentin@grimaud.me"
+    },
+    "multi_instance": "true",
+    "arguments": {
+        "install" : [
+            {
+                "name": "domain",
+                "type": "domain",
+                "ask": {
+                    "en": "Choose a domain for Strut",
+                    "fr": "Choisissez un nom de domaine pour Strut"
+                },
+                "example": "domain.org"
+            },
+            {
+                "name": "path",
+                "type": "path",
+                "ask": {
+                    "en": "Choose a path for Strut",
+                    "fr": "Choisissez l'adresse pour Strut"
+                },
+                "example": "/strut",
+                "default": "/strut"
+            },
+            {
+                "name": "public_site",
+                "ask": {
+                    "en": "Could non member create presentations ?",
+                    "fr": "Une personne non membre peut elle créer une présentation ?"
+                },
+                "choices": ["Yes", "No"],
+                "default": "Yes"
+            }
+
+
+        ]
+    }
+}
