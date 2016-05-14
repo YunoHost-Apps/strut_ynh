@@ -1,6 +1,10 @@
 #!/bin/bash
 
-domain=$(sudo yunohost app setting strut domain)
+# Get app instance name
+app=$YNH_APP_INSTANCE_NAME
 
-sudo rm -rf /var/www/strut
-sudo rm -f /etc/nginx/conf.d/$domain.d/strut.conf
+# Retrieve arguments
+domain=$(sudo yunohost app setting $app domain)
+
+sudo rm -rf /var/www/$app
+sudo rm -f /etc/nginx/conf.d/$domain.d/$app.conf

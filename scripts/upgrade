@@ -1,16 +1,18 @@
 #!/bin/bash
-APP='strut'
+
+# causes the shell to exit if any subcommand or pipeline returns a non-zero status
+set -e
+
+# Get app instance name
+app=$YNH_APP_INSTANCE_NAME
 
 # Retrieve arguments
-domain=$(sudo yunohost app setting $APP domain)
-path=$(sudo yunohost app setting $APP path)
-public_site=$(sudo yunohost app setting $APP public_site)
-
-
-### Execute potential SQL statements here
+domain=$(sudo yunohost app setting $app domain)
+path=$(sudo yunohost app setting $app path)
+public_site=$(sudo yunohost app setting $app public_site)
 
 # Copy files to the right place
-final_path=/var/www/$APP
+final_path=/var/www/$app
 sudo mkdir -p $final_path
 sudo cp -a ../sources/* $final_path
 
@@ -21,14 +23,15 @@ sudo chown -R www-data: $final_path
 sed -i "s@PATHTOCHANGE@$path@g" ../conf/nginx.conf*
 sed -i "s@ALIASTOCHANGE@$final_path/@g" ../conf/nginx.conf*
 
-sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$APP.conf
-
+sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$app.conf
 
 # Reload Nginx
 sudo service nginx reload
-sudo yunohost app setting $APP skipped_uris -v "/"  
+
+# SSO configuration
+sudo yunohost app setting $app skipped_uris -v "/"  
 if [ "$public_site" = "No" ];
 then      
-	sudo yunohost app setting $APP protected_uris -v "/index.html,/scripts" 
+	sudo yunohost app setting $app protected_uris -v "/index.html,/scripts" 
 fi
 sudo yunohost app ssowatconf

@@ -2,6 +2,9 @@
     "name": "Strut",
     "id": "strut",
     "packaging_format": 1,
+    "requirements": {
+        "yunohost": ">= 2.4.0"
+    },
     "description": {
         "en": "Strut is a slide editor creating impress.js presentations.",
         "fr": "Strut est un éditeur de slide permetant de créer des présentation impress.js."

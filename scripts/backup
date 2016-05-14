@@ -1,18 +1,21 @@
 #!/bin/bash
 
-# The parameter $1 is the backup directory location dedicated to the app
-BACKUP_DIR=$1
+# causes the shell to exit if any subcommand or pipeline returns a non-zero status
+set -e
 
-# The parameter $2 is theid of the app instance ex: strut__2
-APP=$2
+# Source YNH helpers
+. /usr/share/yunohost/helpers
 
-domain=$(sudo yunohost app setting $APP domain)
+# Get app instance name
+app=$YNH_APP_INSTANCE_NAME
+
+# Retrieve arguments
+domain=$(sudo yunohost app setting $app domain)
+path=$(sudo yunohost app setting $app path)
+public_site=$(sudo yunohost app setting $app public_site)
 
 # Copy the app files
-final_path=/var/www/$APP
-sudo cp -a $final_path "${BACKUP_DIR}/www" 
+ynh_backup "/var/www/$app" "sources"
 
 # Copy the conf files
-sudo mkdir -p "${BACKUP_DIR}/conf"
-sudo cp -a /etc/nginx/conf.d/$domain.d/$APP.conf "${BACKUP_DIR}/conf/nginx.conf"
-
+ynh_backup "/etc/nginx/conf.d/$domain.d/$app.conf" "conf/nginx.conf"

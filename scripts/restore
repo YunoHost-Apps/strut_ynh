@@ -1,47 +1,50 @@
 #!/bin/bash
 
-# The parameter $1 is the backup directory location dedicated to the app
-BACKUP_DIR=$1
+# causes the shell to exit if any subcommand or pipeline returns a non-zero status
+set -e
 
-# The parameter $2 is the id of the app instance ex: strut__2
-APP=$2
+# Source YNH helpers
+. /usr/share/yunohost/helpers
 
-domain=$(sudo yunohost app setting $APP domain)
-path=$(sudo yunohost app setting $APP path)
-public_site=$(sudo yunohost app setting $APP public_site)
+# Get app instance name
+app=$YNH_APP_INSTANCE_NAME
+
+# Retrieve arguments
+domain=$(sudo yunohost app setting $app domain)
+path=$(sudo yunohost app setting $app path)
+public_site=$(sudo yunohost app setting $app public_site)
 
 # Check domain/path availability
-sudo yunohost app checkurl $domain$path -a $APP
+sudo yunohost app checkurl $domain$path -a $app
 if [[ ! $? -eq 0 ]]; then
     echo "There is already an app on this URL : $domain$path" | sudo tee /dev/stderr
     exit 1
 fi
 
 # Restore the app files
-final_path=/var/www/$APP
-
+final_path=/var/www/$app
 if [ -d $final_path ]; then
     echo "There is already a directory: $final_path " | sudo tee /dev/stderr
     exit 1
 fi
-sudo cp -a "${BACKUP_DIR}/www" $final_path 
+sudo cp -a "sources" $final_path 
 sudo chown -R www-data: $final_path
 
 # Restore the conf files
-conf=/etc/nginx/conf.d/$domain.d/$APP.conf
+conf=/etc/nginx/conf.d/$domain.d/$app.conf
 if [ -f $conf ]; then
     echo "There is already a nginx conf file at this path: $conf " | sudo tee /dev/stderr
     exit 1
 fi
-sudo cp -a "${BACKUP_DIR}/conf/nginx.conf" $conf
+sudo cp -a "conf/nginx.conf" $conf
 
 # Reload Nginx
 sudo service nginx reload
 
 # Set ssowat config
-sudo yunohost app setting $APP skipped_uris -v "/" 
+sudo yunohost app setting $app skipped_uris -v "/" 
 if [ "$public_site" = "No" ];
 then   
-	sudo yunohost app setting $APP protected_uris -v "/index.html,/scripts" 
+	sudo yunohost app setting $app protected_uris -v "/index.html,/scripts" 
 fi
 sudo yunohost app ssowatconf
