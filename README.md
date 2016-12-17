@@ -5,10 +5,6 @@ Strut package for YunoHost
 
 ## Official Website: http://strut.io 
 
-## How to report a bug ?
-
-You can report an issue concerning this package on the official YunoHost bug tracker : https://dev.yunohost.org .
-
 ## About Strut
 
 [![Facelift](https://f.cloud.github.com/assets/1009003/515405/f1003c6a-be74-11e2-84b9-14776c652afb.png)](http://strut.io)
