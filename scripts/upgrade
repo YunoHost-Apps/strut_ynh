@@ -1,37 +1,114 @@
 #!/bin/bash
 
-# causes the shell to exit if any subcommand or pipeline returns a non-zero status
-set -e
+#=================================================
+# GENERIC START
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
 
-# Get app instance name
+source _future.sh
+source /usr/share/yunohost/helpers
+
+#=================================================
+# LOAD SETTINGS
+#=================================================
+
 app=$YNH_APP_INSTANCE_NAME
 
-# Retrieve arguments
-domain=$(sudo yunohost app setting $app domain)
-path=$(sudo yunohost app setting $app path)
-public_site=$(sudo yunohost app setting $app public_site)
+domain=$(ynh_app_setting_get $app domain)
+path_url=$(ynh_app_setting_get $app path)
+is_public=$(ynh_app_setting_get $app is_public)
+final_path=$(ynh_app_setting_get $app final_path)
 
-# Copy files to the right place
-final_path=/var/www/$app
-sudo mkdir -p $final_path
-sudo cp -a ../sources/* $final_path
+#=================================================
+# Check version
+#=================================================
+abort_if_up_to_date
 
-# Set permissions to roundcube directory
-sudo chown -R www-data: $final_path
+#=================================================
+# BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
+#=================================================
 
-# Modify Nginx configuration file and copy it to Nginx conf directory
-sed -i "s@PATHTOCHANGE@$path@g" ../conf/nginx.conf*
-sed -i "s@ALIASTOCHANGE@$final_path/@g" ../conf/nginx.conf*
+ynh_backup_before_upgrade	# Backup the current version of the app
+ynh_clean_setup () {
+	ynh_restore_upgradebackup	# restore it if the upgrade fails
+}
+ynh_abort_if_errors	# Exit if an error occurs during the execution of the script
 
-sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$app.conf
+#=================================================
+# ENSURE DOWNWARD COMPATIBILITY
+#=================================================
 
-# Reload Nginx
-sudo service nginx reload
-
-# SSO configuration
-sudo yunohost app setting $app skipped_uris -v "/"  
-if [ "$public_site" = "No" ];
-then      
-	sudo yunohost app setting $app protected_uris -v "/index.html,/scripts" 
+if [ "${version}" = "20160501-7" ]; then
+    public_site=$(ynh_app_setting_get $app public_site)
+    # Fix is_public as a boolean value
+    if [ "$public_site" = "Yes" ]; then
+        ynh_app_setting_set $app is_public 1
+        is_public=1
+    elif [ "$public_site" = "No" ]; then
+        ynh_app_setting_set $app is_public 0
+        is_public=0
+    fi
+    ynh_app_setting_delete $app public_site
+    
+    # If final_path doesn't exist, create it
+    if [ -z $final_path ]; then
+        final_path=/var/www/$app
+        ynh_app_setting_set $app final_path $final_path
+    fi
 fi
-sudo yunohost app ssowatconf
+
+#=================================================
+# CHECK THE PATH
+#=================================================
+
+# Normalize the URL path syntax
+path_url=$(ynh_normalize_url_path $path_url)
+
+#=================================================
+# STANDARD UPGRADE STEPS
+#=================================================
+# DOWNLOAD, CHECK AND UNPACK SOURCE
+#=================================================
+
+# Download, check integrity, uncompress and patch the source from app.src
+# For this app sources are in app subdirectory 
+tmp_dir=$(mktemp -d)
+ynh_setup_source "$tmp_dir"
+cp -R "$tmp_dir/sources/."  "$final_path/"
+ynh_secure_remove "$tmp_dir"
+
+#=================================================
+# NGINX CONFIGURATION
+#=================================================
+
+# Create a dedicated nginx config
+ynh_add_nginx_config
+
+#=================================================
+# GENERIC FINALIZATION
+#=================================================
+# SECURE FILES AND DIRECTORIES
+#=================================================
+
+# Set strong right permissions
+chown -R root:www-data "$final_path"
+chmod -R 640 "$final_path"
+find "$final_path" -type d -print0 | xargs -0 chmod 750
+
+#=================================================
+# SETUP SSOWAT
+#=================================================
+
+# Make app public if necessary or protect it
+if [ $is_public -eq 1 ]
+then
+    ynh_app_setting_set $app skipped_uris "/"
+else
+    ynh_app_setting_set $app protected_uris "/"
+fi
+
+#=================================================
+# RELOAD NGINX
+#=================================================
+systemctl reload nginx

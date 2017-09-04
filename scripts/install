@@ -1,43 +1,81 @@
 #!/bin/bash
+#=================================================
+# GENERIC START
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
+#source _common.sh
+source /usr/share/yunohost/helpers
 
-# causes the shell to exit if any subcommand or pipeline returns a non-zero status
-set -e
+#=================================================
+# MANAGE SCRIPT FAILURE
+#=================================================
+# Exit if an error occurs during the execution of the script
+ynh_abort_if_errors
 
-# Get app instance name
+#=================================================
+# RETRIEVE ARGUMENTS FROM THE MANIFEST
+#=================================================
+domain=$YNH_APP_ARG_DOMAIN
+path_url=$YNH_APP_ARG_PATH
+is_public=$YNH_APP_ARG_IS_PUBLIC
+
 app=$YNH_APP_INSTANCE_NAME
 
-# Retrieve arguments
-domain=$YNH_APP_ARG_DOMAIN
-path=$YNH_APP_ARG_PATH
-public_site=$YNH_APP_ARG_PUBLIC_SITE
-
-sudo yunohost app setting $app public_site -v $public_site
-
-# Check domain/path availability
-sudo yunohost app checkurl $domain$path -a $app
-if [[ ! $? -eq 0 ]]; then
-    exit 1
-fi
-
-
-# Copy files to the right place
+#=================================================
+# CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
+#=================================================
 final_path=/var/www/$app
-sudo mkdir -p $final_path
-sudo cp -a ../sources/* $final_path
+test ! -e "$final_path" || ynh_die "This path already contains a folder"
 
-# Set permissions to roundcube directory
-sudo chown -R www-data: $final_path
+# Register (book) web path
+ynh_webpath_register $app $domain $path_url
 
+#=================================================
+# STORE SETTINGS FROM MANIFEST
+#=================================================
+ynh_app_setting_set $app is_public $is_public
 
-# Modify Nginx configuration file and copy it to Nginx conf directory
-sed -i "s@PATHTOCHANGE@$path@g" ../conf/nginx.conf
-sed -i "s@ALIASTOCHANGE@$final_path/@g" ../conf/nginx.conf
-sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$app.conf
-# Reload Nginx and regenerate SSOwat conf
-sudo service nginx reload
-sudo yunohost app setting $app skipped_uris -v "/" 
-if [ "$public_site" = "No" ];
-then   
-	sudo yunohost app setting $app protected_uris -v "/index.html,/scripts" 
+#=================================================
+# DOWNLOAD, CHECK AND UNPACK SOURCE
+#=================================================
+ynh_app_setting_set $app final_path $final_path
+# Download, check integrity, uncompress and patch the source from app.src
+# For this app sources are in app subdirectory 
+tmp_dir=$(mktemp -d)
+ynh_clean_setup () {
+    rm -Rf "$tmp_dir"
+}
+ynh_setup_source "$tmp_dir"
+mv "$tmp_dir/sources"  "$final_path"
+ynh_secure_remove "$tmp_dir"
+#=================================================
+# NGINX CONFIGURATION
+#=================================================
+# Create a dedicated nginx config
+ynh_add_nginx_config
+
+#=================================================
+# GENERIC FINALIZATION
+#=================================================
+# SECURE FILES AND DIRECTORIES
+#=================================================
+# Set strong right permissions to app files
+chown -R root:www-data "$final_path"
+chmod -R 640 "$final_path"
+find "$final_path" -type d -print0 | xargs -0 chmod 750
+
+#=================================================
+# SETUP SSOWAT
+#=================================================
+
+# Make app public if necessary or protect it
+if [ $is_public -eq 1 ]
+then
+    ynh_app_setting_set $app skipped_uris "/"
 fi
-sudo yunohost app ssowatconf
+
+#=================================================
+# RELOAD NGINX
+#=================================================
+systemctl reload nginx

@@ -2,8 +2,11 @@
     "name": "Strut",
     "id": "strut",
     "packaging_format": 1,
+    "version": "20160915-2",
+    "url": "http://strut.io",
+    "license": "AGPL-3.0",
     "requirements": {
-        "yunohost": ">= 2.4.0"
+        "yunohost": ">= 2.7.2"
     },
     "description": {
         "en": "Strut is a slide editor creating impress.js presentations.",
@@ -11,9 +14,9 @@
     },
     "maintainer": {
         "name": "zamentur",
-        "email": "valentin@grimaud.me"
+        "email": "ljf+yunohost@grimaud.me"
     },
-    "multi_instance": "true",
+    "multi_instance": true,
     "services": [
         "nginx"
     ],
@@ -26,7 +29,7 @@
                     "en": "Choose a domain for Strut",
                     "fr": "Choisissez un nom de domaine pour Strut"
                 },
-                "example": "domain.org"
+                "example": "example.com"
             },
             {
                 "name": "path",
@@ -39,13 +42,13 @@
                 "default": "/strut"
             },
             {
-                "name": "public_site",
+                "name": "is_public",
+                "type": "boolean",
                 "ask": {
                     "en": "Could non member create presentations ?",
                     "fr": "Une personne non membre peut elle créer une présentation ?"
                 },
-                "choices": ["Yes", "No"],
-                "default": "Yes"
+                "default": true
             }
 
 

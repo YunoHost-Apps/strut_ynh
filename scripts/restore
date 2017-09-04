@@ -1,50 +1,63 @@
 #!/bin/bash
 
-# causes the shell to exit if any subcommand or pipeline returns a non-zero status
-set -e
+#=================================================
+# GENERIC START
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
 
-# Source YNH helpers
-. /usr/share/yunohost/helpers
+#source ../settings/scripts/_common.sh
+source /usr/share/yunohost/helpers
 
-# Get app instance name
+#=================================================
+# MANAGE SCRIPT FAILURE
+#=================================================
+# Exit on command errors and treat access to unset variables as an error
+ynh_abort_if_errors
+
+#=================================================
+# LOAD SETTINGS
+#=================================================
+
 app=$YNH_APP_INSTANCE_NAME
 
-# Retrieve arguments
-domain=$(sudo yunohost app setting $app domain)
-path=$(sudo yunohost app setting $app path)
-public_site=$(sudo yunohost app setting $app public_site)
+domain=$(ynh_app_setting_get $app domain)
+path_url=$(ynh_app_setting_get $app path)
+final_path=$(ynh_app_setting_get $app final_path)
 
-# Check domain/path availability
-sudo yunohost app checkurl $domain$path -a $app
-if [[ ! $? -eq 0 ]]; then
-    echo "There is already an app on this URL : $domain$path" | sudo tee /dev/stderr
-    exit 1
-fi
+#=================================================
+# CHECK IF THE APP CAN BE RESTORED
+#=================================================
 
-# Restore the app files
-final_path=/var/www/$app
-if [ -d $final_path ]; then
-    echo "There is already a directory: $final_path " | sudo tee /dev/stderr
-    exit 1
-fi
-sudo cp -a "sources" $final_path 
-sudo chown -R www-data: $final_path
+ynh_webpath_available $domain $path_url \
+	|| ynh_die "Path not available: ${domain}${path_url}"
+test ! -d $final_path \
+	|| ynh_die "There is already a directory: $final_path "
+conf="/etc/nginx/conf.d/$domain.d/$app.conf"
+test ! -f $conf \
+    || ynh_die "There is already a nginx conf file at this path: $conf "
 
-# Restore the conf files
-conf=/etc/nginx/conf.d/$domain.d/$app.conf
-if [ -f $conf ]; then
-    echo "There is already a nginx conf file at this path: $conf " | sudo tee /dev/stderr
-    exit 1
-fi
-sudo cp -a "conf/nginx.conf" $conf
+#=================================================
+# STANDARD RESTORATION STEPS
+#=================================================
+# RESTORE BACKUP FILES
+#=================================================
 
-# Reload Nginx
-sudo service nginx reload
+ynh_restore
 
-# Set ssowat config
-sudo yunohost app setting $app skipped_uris -v "/" 
-if [ "$public_site" = "No" ];
-then   
-	sudo yunohost app setting $app protected_uris -v "/index.html,/scripts" 
-fi
-sudo yunohost app ssowatconf
+#=================================================
+# RESTORE USER RIGHTS
+#=================================================
+
+# Restore permissions on app files
+chown -R root:www-data "$final_path"
+chmod -R 640 "$final_path"
+find "$final_path" -type d -print0 | xargs -0 chmod 750
+
+#=================================================
+# GENERIC FINALIZATION
+#=================================================
+# RELOAD NGINX
+#=================================================
+
+systemctl reload nginx

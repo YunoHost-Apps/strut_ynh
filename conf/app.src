@@ -1,0 +1,6 @@
+SOURCE_URL=https://github.com/YunoHost-Apps/strut_ynh/archive/ebd1e859cb1ecc0cc3166969fc1db649f3ddb61c.tar.gz
+SOURCE_SUM=6178b9b614c16167945804bdc460101324245b232215d993a5ae3b3bc38b8db6
+SOURCE_SUM_PRG=sha256sum
+SOURCE_FORMAT=tar.gz
+SOURCE_IN_SUBDIR=true
+SOURCE_FILENAME=strut-20160915-1.tar.gz
