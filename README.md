@@ -19,7 +19,6 @@ To avoid to take time to build this html/js app, this package setups a builded v
 
 #### A GUI / Authoring Tool for ImpressJS and Bespoke.js ####
 
-Don't know what ImpressJS is?  Check out the ImpressJS demo presentation: http://bartaz.github.com/impress.js/#/bored
 
 ### Start using Strut! http://strut.io/editor/
 (works in Firefox, Chrome and Safari with basic support for IE10)
