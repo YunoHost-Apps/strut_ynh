@@ -44,7 +44,7 @@ ynh_app_setting_set $app final_path $final_path
 # For this app sources are in app subdirectory 
 tmp_dir=$(mktemp -d)
 ynh_clean_setup () {
-    rm -Rf "$tmp_dir"
+    ynh_secure_remove "$tmp_dir"
 }
 ynh_setup_source "$tmp_dir"
 mv "$tmp_dir/sources"  "$final_path"
