@@ -2,7 +2,7 @@
     "name": "Strut",
     "id": "strut",
     "packaging_format": 1,
-    "version": "20160915-2",
+    "version": "20171224-1",
     "url": "http://strut.io",
     "license": "AGPL-3.0",
     "requirements": {
