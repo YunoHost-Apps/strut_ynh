@@ -75,6 +75,7 @@ path_url=$(ynh_normalize_url_path $path_url)
 # For this app sources are in app subdirectory 
 tmp_dir=$(mktemp -d)
 ynh_setup_source "$tmp_dir"
+# Dist is the compiled version. Other directories are source code and tools to build the program
 cp -R "$tmp_dir/dist/."  "$final_path/"
 # Imgur is deactivated on the specific upstream selected, but this text is still here
 # Don't use a patch because it's minified js
