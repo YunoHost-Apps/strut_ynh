@@ -47,7 +47,10 @@ ynh_clean_setup () {
     ynh_secure_remove "$tmp_dir"
 }
 ynh_setup_source "$tmp_dir"
-mv "$tmp_dir/sources"  "$final_path"
+mv "$tmp_dir/dist"  "$final_path"
+# Imgur is deactivated on the specific upstream selected, but this text is still here
+# Don't use a patch because it's minified js
+ynh_replace_string "are currently uploaded to imgur.*re working on changing this" "size is limited" "$final_path/scripts/amd-app.js"
 ynh_secure_remove "$tmp_dir"
 #=================================================
 # NGINX CONFIGURATION

@@ -13,7 +13,7 @@
 		setup_private=1
 		setup_public=1
 		upgrade=1
-		upgrade=1	from_commit=03c3ea18cf117127749a860afe538bc6070a8e0b
+#		upgrade=1	from_commit=03c3ea18cf117127749a860afe538bc6070a8e0b
 		backup_restore=1
 		multi_instance=1
 		incorrect_path=1
@@ -35,7 +35,7 @@
 ;;; Options
 Email=ljf+ynh-strut@grimaud.me
 Notification=down
-;;; Upgrade options
-	; commit=03c3ea18cf117127749a860afe538bc6070a8e0b
-		name=Update package to level 7
-		manifest_arg=domain=DOMAIN&path=PATH&is_public=Yes&
+#;;; Upgrade options
+#	; commit=03c3ea18cf117127749a860afe538bc6070a8e0b
+#		name=Update package to level 7
+#		manifest_arg=domain=DOMAIN&path=PATH&is_public=Yes&
