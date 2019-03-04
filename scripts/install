@@ -1,21 +1,25 @@
 #!/bin/bash
+
 #=================================================
 # GENERIC START
 #=================================================
 # IMPORT GENERIC HELPERS
 #=================================================
-#source _common.sh
+
+# source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
 # MANAGE SCRIPT FAILURE
 #=================================================
+
 # Exit if an error occurs during the execution of the script
 ynh_abort_if_errors
 
 #=================================================
 # RETRIEVE ARGUMENTS FROM THE MANIFEST
 #=================================================
+
 domain=$YNH_APP_ARG_DOMAIN
 path_url=$YNH_APP_ARG_PATH
 is_public=$YNH_APP_ARG_IS_PUBLIC
@@ -25,6 +29,7 @@ app=$YNH_APP_INSTANCE_NAME
 #=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
 #=================================================
+
 final_path=/var/www/$app
 test ! -e "$final_path" || ynh_die "This path already contains a folder"
 
@@ -34,36 +39,50 @@ ynh_webpath_register $app $domain $path_url
 #=================================================
 # STORE SETTINGS FROM MANIFEST
 #=================================================
+
+ynh_app_setting_set $app domain $domain
+ynh_app_setting_set $app path $path_url
 ynh_app_setting_set $app is_public $is_public
 
 #=================================================
+# STANDARD MODIFICATIONS
+#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
+
 ynh_app_setting_set $app final_path $final_path
 # Download, check integrity, uncompress and patch the source from app.src
 # For this app sources are in app subdirectory 
 tmp_dir=$(mktemp -d)
-ynh_clean_setup () {
-    ynh_secure_remove "$tmp_dir"
-}
+
 ynh_setup_source "$tmp_dir"
 mv "$tmp_dir/dist"  "$final_path"
-# Imgur is deactivated on the specific upstream selected, but this text is still here
-# Don't use a patch because it's minified js
-ynh_replace_string "are currently uploaded to imgur.*re working on changing this" "size is limited" "$final_path/scripts/amd-app.js"
 ynh_secure_remove "$tmp_dir"
+
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
+
 # Create a dedicated nginx config
 ynh_add_nginx_config
+
+#=================================================
+# SPECIFIC SETUP
+#=================================================
+# PATCH SOURCE
+#=================================================
+
+# Imgur is deactivated on the specific upstream selected, but this text is still here
+# Don't use a patch because it's minified js
+ynh_replace_string "are currently uploaded to imgur.*re working on changing this" "size is limited" "$final_path/scripts/amd-app.js"
 
 #=================================================
 # GENERIC FINALIZATION
 #=================================================
 # SECURE FILES AND DIRECTORIES
 #=================================================
-# Set strong right permissions to app files
+
+# Set permissions to app files
 chown -R root:www-data "$final_path"
 chmod -R 640 "$final_path"
 find "$final_path" -type d -print0 | xargs -0 chmod 750
@@ -72,7 +91,7 @@ find "$final_path" -type d -print0 | xargs -0 chmod 750
 # SETUP SSOWAT
 #=================================================
 
-# Make app public if necessary or protect it
+# Make app public if necessary
 if [ $is_public -eq 1 ]
 then
     ynh_app_setting_set $app skipped_uris "/"
@@ -81,4 +100,5 @@ fi
 #=================================================
 # RELOAD NGINX
 #=================================================
+
 systemctl reload nginx
