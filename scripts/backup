@@ -19,6 +19,7 @@ ynh_abort_if_errors
 #=================================================
 # LOAD SETTINGS
 #=================================================
+ynh_print_info "Loading installation settings..."
 
 app=$YNH_APP_INSTANCE_NAME
 
@@ -30,11 +31,19 @@ final_path=$(ynh_app_setting_get $app final_path)
 #=================================================
 # BACKUP THE APP MAIN DIR
 #=================================================
+ynh_print_info "Backing up the main app directory..."
 
 ynh_backup "$final_path"
 
 #=================================================
 # BACKUP THE NGINX CONFIGURATION
 #=================================================
+ynh_print_info "Backing up nginx web server configuration..."
 
 ynh_backup "/etc/nginx/conf.d/$domain.d/$app.conf"
+
+#=================================================
+# END OF SCRIPT
+#=================================================
+
+ynh_print_info "Backup script completed for $app. (YunoHost will then actually copy those files to the archive)."

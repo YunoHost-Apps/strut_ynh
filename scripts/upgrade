@@ -12,6 +12,7 @@ source /usr/share/yunohost/helpers
 #=================================================
 # LOAD SETTINGS
 #=================================================
+ynh_print_info "Loading installation settings..."
 
 app=$YNH_APP_INSTANCE_NAME
 
@@ -29,6 +30,7 @@ upgrade_type=$(ynh_check_app_version_changed)
 #=================================================
 # ENSURE DOWNWARD COMPATIBILITY
 #=================================================
+ynh_print_info "Ensuring downward compatibility..."
 
 if [ "${version}" = "20160501-7" ]; then
     public_site=$(ynh_app_setting_get $app public_site)
@@ -52,6 +54,7 @@ fi
 #=================================================
 # BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
 #=================================================
+ynh_print_info "Backing up the app before upgrading (may take a while)..."
 
 # Backup the current version of the app
 ynh_backup_before_upgrade
@@ -77,6 +80,8 @@ path_url=$(ynh_normalize_url_path $path_url)
 
 if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
+	ynh_print_info "Upgrading source files..."
+
 	# Download, check integrity, uncompress and patch the source from app.src
 	# For this app sources are in app subdirectory 
 	tmp_dir=$(mktemp -d)
@@ -94,6 +99,7 @@ fi
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
+ynh_print_info "Upgrading nginx web server configuration..."
 
 # Create a dedicated nginx config
 ynh_add_nginx_config
@@ -125,6 +131,7 @@ find "$final_path" -type d -print0 | xargs -0 chmod 750
 #=================================================
 # SETUP SSOWAT
 #=================================================
+ynh_print_info "Upgrading SSOwat configuration..."
 
 # Make app public if necessary
 if [ $is_public -eq 1 ]
@@ -135,5 +142,12 @@ fi
 #=================================================
 # RELOAD NGINX
 #=================================================
+ynh_print_info "Reloading nginx web server..."
 
 systemctl reload nginx
+
+#=================================================
+# END OF SCRIPT
+#=================================================
+
+ynh_print_info "Upgrade of $app completed"
