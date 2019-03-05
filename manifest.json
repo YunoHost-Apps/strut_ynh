@@ -6,7 +6,7 @@
     "url": "http://strut.io",
     "license": "AGPL-3.0",
     "requirements": {
-        "yunohost": ">= 3.2.0"
+        "yunohost": ">= 3.2.2"
     },
     "description": {
         "en": "Strut is a slide editor creating impress.js presentations.",
