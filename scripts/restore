@@ -6,18 +6,20 @@
 # IMPORT GENERIC HELPERS
 #=================================================
 
-#source ../settings/scripts/_common.sh
+# source ../settings/scripts/_common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
 # MANAGE SCRIPT FAILURE
 #=================================================
-# Exit on command errors and treat access to unset variables as an error
+
+# Exit if an error occurs during the execution of the script
 ynh_abort_if_errors
 
 #=================================================
 # LOAD SETTINGS
 #=================================================
+ynh_print_info "Loading settings..."
 
 app=$YNH_APP_INSTANCE_NAME
 
@@ -28,22 +30,27 @@ final_path=$(ynh_app_setting_get $app final_path)
 #=================================================
 # CHECK IF THE APP CAN BE RESTORED
 #=================================================
+ynh_print_info "Validating restoration parameters..."
 
 ynh_webpath_available $domain $path_url \
 	|| ynh_die "Path not available: ${domain}${path_url}"
 test ! -d $final_path \
 	|| ynh_die "There is already a directory: $final_path "
-conf="/etc/nginx/conf.d/$domain.d/$app.conf"
-test ! -f $conf \
-    || ynh_die "There is already a nginx conf file at this path: $conf "
 
 #=================================================
 # STANDARD RESTORATION STEPS
 #=================================================
-# RESTORE BACKUP FILES
+# RESTORE THE NGINX CONFIGURATION
 #=================================================
 
-ynh_restore
+ynh_restore_file "/etc/nginx/conf.d/$domain.d/$app.conf"
+
+#=================================================
+# RESTORE THE APP MAIN DIR
+#=================================================
+ynh_print_info "Restoring the app main directory..."
+
+ynh_restore_file "$final_path"
 
 #=================================================
 # RESTORE USER RIGHTS
@@ -59,5 +66,12 @@ find "$final_path" -type d -print0 | xargs -0 chmod 750
 #=================================================
 # RELOAD NGINX
 #=================================================
+ynh_print_info "Reloading nginx web server and php-fpm..."
 
 systemctl reload nginx
+
+#=================================================
+# END OF SCRIPT
+#=================================================
+
+ynh_print_info "Restoration completed for $app"
