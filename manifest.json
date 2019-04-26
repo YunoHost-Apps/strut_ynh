@@ -13,7 +13,7 @@
         "fr": "Strut est un éditeur de slide permetant de créer des présentation impress.js."
     },
     "maintainer": {
-        "name": "zamentur",
+        "name": "ljf",
         "email": "ljf+yunohost@grimaud.me"
     },
     "multi_instance": true,
