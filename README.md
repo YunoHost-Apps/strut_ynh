@@ -31,9 +31,9 @@ Quick description of this app.
 
 #### Supported architectures
 
-* x86-64b - [![Build Status](https://ci-apps.yunohost.org/ci/logs/strut%20%28Official%29.svg)](https://ci-apps.yunohost.org/ci/apps/strut/)
-* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/strut%20%28Official%29.svg)](https://ci-apps-arm.yunohost.org/ci/apps/strut/)
-* Jessie x86-64b - [![Build Status](https://ci-stretch.nohost.me/ci/logs/strut%20%28Official%29.svg)](https://ci-stretch.nohost.me/ci/apps/strut/)
+* x86-64b - [![Build Status](https://ci-apps.yunohost.org/ci/logs/strut%20%28Apps%29.svg)](https://ci-apps.yunohost.org/ci/apps/strut/)
+* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/strut%20%28Apps%29.svg)](https://ci-apps-arm.yunohost.org/ci/apps/strut/)
+* Jessie x86-64b - [![Build Status](https://ci-stretch.nohost.me/ci/logs/strut%20%28Apps%29.svg)](https://ci-stretch.nohost.me/ci/apps/strut/)
 
 ## Limitations
 
@@ -49,6 +49,7 @@ To avoid to take time to build this html/js app, this package setups a builded v
 
  * Report a bug: https://github.com/YunoHost-Apps/strut_ynh/issues
  * Strut website: http://strut.io
+ * Strut repository: https://github.com/MohannadNaj/Strut
  * YunoHost website: https://yunohost.org/
 
 ---
