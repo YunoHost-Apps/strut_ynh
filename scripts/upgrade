@@ -90,10 +90,6 @@ then
 	# Dist is the compiled version. Other directories are source code and tools to build the program
 	cp -a "$tmp_dir/dist/."  "$final_path/"
 	ynh_secure_remove --file="$tmp_dir"
-
-	# Imgur is deactivated on the specific upstream selected, but this text is still here
-	# Don't use a patch because it's minified js
-	ynh_replace_string --match_string="are currently uploaded to imgur.*re working on changing this" --replace_string="size is limited" --target_file="$final_path/scripts/amd-app.js"
 fi
 
 #=================================================
