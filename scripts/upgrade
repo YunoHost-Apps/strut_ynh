@@ -6,64 +6,71 @@
 # IMPORT GENERIC HELPERS
 #=================================================
 
-source _future.sh
+# source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
 # LOAD SETTINGS
 #=================================================
+ynh_script_progression --message="Loading installation settings..." --weight=3
 
 app=$YNH_APP_INSTANCE_NAME
 
-domain=$(ynh_app_setting_get $app domain)
-path_url=$(ynh_app_setting_get $app path)
-is_public=$(ynh_app_setting_get $app is_public)
-final_path=$(ynh_app_setting_get $app final_path)
+domain=$(ynh_app_setting_get --app=$app --key=domain)
+path_url=$(ynh_app_setting_get --app=$app --key=path)
+is_public=$(ynh_app_setting_get --app=$app --key=is_public)
+final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 
 #=================================================
-# Check version
-#=================================================
-abort_if_up_to_date
-
-#=================================================
-# BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
+# CHECK VERSION
 #=================================================
 
-ynh_backup_before_upgrade	# Backup the current version of the app
-ynh_clean_setup () {
-	ynh_restore_upgradebackup	# restore it if the upgrade fails
-}
-ynh_abort_if_errors	# Exit if an error occurs during the execution of the script
+upgrade_type=$(ynh_check_app_version_changed)
 
 #=================================================
 # ENSURE DOWNWARD COMPATIBILITY
 #=================================================
+ynh_script_progression --message="Ensuring downward compatibility..."
 
 if [ "${version}" = "20160501-7" ]; then
-    public_site=$(ynh_app_setting_get $app public_site)
+    public_site=$(ynh_app_setting_get --app=$app --key=public_site)
     # Fix is_public as a boolean value
     if [ "$public_site" = "Yes" ]; then
-        ynh_app_setting_set $app is_public 1
+        ynh_app_setting_set --app=$app --key=is_public --value=1
         is_public=1
     elif [ "$public_site" = "No" ]; then
-        ynh_app_setting_set $app is_public 0
+        ynh_app_setting_set --app=$app --key=is_public --value=0
         is_public=0
     fi
     ynh_app_setting_delete $app public_site
-    
+
     # If final_path doesn't exist, create it
-    if [ -z $final_path ]; then
+    if [ -z "$final_path" ]; then
         final_path=/var/www/$app
-        ynh_app_setting_set $app final_path $final_path
+        ynh_app_setting_set --app=$app --key=final_path --value=$final_path
     fi
 fi
+
+#=================================================
+# BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
+#=================================================
+ynh_script_progression --message="Backing up the app before upgrading (may take a while)..." --weight=6
+
+# Backup the current version of the app
+ynh_backup_before_upgrade
+ynh_clean_setup () {
+	# restore it if the upgrade fails
+	ynh_restore_upgradebackup
+}
+# Exit if an error occurs during the execution of the script
+ynh_abort_if_errors
 
 #=================================================
 # CHECK THE PATH
 #=================================================
 
 # Normalize the URL path syntax
-path_url=$(ynh_normalize_url_path $path_url)
+path_url=$(ynh_normalize_url_path --path_url=$path_url)
 
 #=================================================
 # STANDARD UPGRADE STEPS
@@ -71,23 +78,40 @@ path_url=$(ynh_normalize_url_path $path_url)
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 
-# Download, check integrity, uncompress and patch the source from app.src
-# For this app sources are in app subdirectory 
-tmp_dir=$(mktemp -d)
-ynh_setup_source "$tmp_dir"
-# Dist is the compiled version. Other directories are source code and tools to build the program
-cp -R "$tmp_dir/dist/."  "$final_path/"
-# Imgur is deactivated on the specific upstream selected, but this text is still here
-# Don't use a patch because it's minified js
-ynh_replace_string "are currently uploaded to imgur.*re working on changing this" "size is limited" "$final_path/scripts/amd-app.js"
-ynh_secure_remove "$tmp_dir"
+if [ "$upgrade_type" == "UPGRADE_APP" ]
+then
+	ynh_script_progression --message="Upgrading source files..." --weight=4
+
+	# Download, check integrity, uncompress and patch the source from app.src
+	# For this app sources are in app subdirectory 
+	tmp_dir=$(mktemp -d)
+
+	ynh_setup_source --dest_dir="$tmp_dir"
+	# Dist is the compiled version. Other directories are source code and tools to build the program
+	cp -a "$tmp_dir/dist/."  "$final_path/"
+	ynh_secure_remove --file="$tmp_dir"
+fi
 
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
+ynh_script_progression --message="Upgrading nginx web server configuration..."
 
 # Create a dedicated nginx config
 ynh_add_nginx_config
+
+#=================================================
+# SPECIFIC UPGRADE
+#=================================================
+# PATCH SOURCE
+#=================================================
+
+if [ "$upgrade_type" == "UPGRADE_APP" ]
+then
+	# Imgur is deactivated on the specific upstream selected, but this text is still here
+	# Don't use a patch because it's minified js
+	ynh_replace_string --match_string="are currently uploaded to imgur.*re working on changing this" --replace_string="size is limited" --target_file="$final_path/scripts/amd-app.js"
+fi
 
 #=================================================
 # GENERIC FINALIZATION
@@ -95,7 +119,7 @@ ynh_add_nginx_config
 # SECURE FILES AND DIRECTORIES
 #=================================================
 
-# Set strong right permissions
+# Set permissions on app files
 chown -R root:www-data "$final_path"
 chmod -R 640 "$final_path"
 find "$final_path" -type d -print0 | xargs -0 chmod 750
@@ -103,16 +127,23 @@ find "$final_path" -type d -print0 | xargs -0 chmod 750
 #=================================================
 # SETUP SSOWAT
 #=================================================
+ynh_script_progression --message="Upgrading SSOwat configuration..." --weight=5
 
-# Make app public if necessary or protect it
+# Make app public if necessary
 if [ $is_public -eq 1 ]
 then
-    ynh_app_setting_set $app skipped_uris "/"
-else
-    ynh_app_setting_set $app protected_uris "/"
+    ynh_app_setting_set --app=$app --key=skipped_uris --value="/"
 fi
 
 #=================================================
 # RELOAD NGINX
 #=================================================
-systemctl reload nginx
+ynh_script_progression --message="Reloading nginx web server..."
+
+ynh_systemd_action --service_name=nginx --action=reload
+
+#=================================================
+# END OF SCRIPT
+#=================================================
+
+ynh_script_progression --message="Upgrade of $app completed" --last
