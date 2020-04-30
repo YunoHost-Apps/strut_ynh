@@ -17,7 +17,7 @@ Strut est un éditeur WEB de présentations fonctionnant en HTML/JS. Tout se pas
 
 ![](https://f.cloud.github.com/assets/1009003/515405/f1003c6a-be74-11e2-84b9-14776c652afb.png)
 
-## Demo
+## Démo
 
 * [Démo officielle](http://strut.io/editor/index.html)
 
