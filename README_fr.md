@@ -41,6 +41,8 @@ S'il y a une configuration possible, sentez vous libre d'y contribuer.
 
 ## Limitations
 
+Pas d'import/export possible depuis ou vers des fichiers OpenDocument ou pptx.
+
 ## Information supplémentaires
 
 * Ce package ne contient pas les sources exactes de [la version originale de Strut](https://github.com/tantaman/Strut)
