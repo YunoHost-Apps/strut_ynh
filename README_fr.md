@@ -9,7 +9,7 @@
 Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l'installer et en profiter*
 
 ## Vue d'ensemble
-*Description à écrire en anglais et en français.*
+Strut est un éditeur WEB de présentations fonctionnant en HTML/JS. Tout se passe en local. Il fonctinne grâce à [impress.js](http://bartaz.github.com/impress.js/#/bored).
 
 **Version incluse :** 20171224-1
 
@@ -23,9 +23,11 @@ Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour
 
 ## Configuration
 
+S'il y a une configuration possible, sentez vous libre d'y contribuer.
+
 ## Documentation
 
- * apas
+ * S'il y a une documentation spéficique, sentez vous libre d'y contribuer.
 
 ## Caractéristiques spécifiques à YunoHost
 
