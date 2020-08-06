@@ -10,7 +10,7 @@
     },
     "description": {
         "en": "Strut is a slide editor creating impress.js presentations.",
-        "fr": "Strut est un éditeur de slide permetant de créer des présentation impress.js."
+        "fr": "Strut est un éditeur de diapositives permettant de créer des présentations impress.js."
     },
     "maintainer": {
         "name": "ljf",
