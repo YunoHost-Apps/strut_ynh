@@ -9,8 +9,8 @@
         "yunohost": ">= 3.5.0"
     },
     "description": {
-        "en": "Strut is a slide editor creating impress.js presentations.",
-        "fr": "Strut est un éditeur de diapositives permettant de créer des présentations impress.js."
+        "en": "Slide editor for creating impress.js presentations.",
+        "fr": "Éditeur de diapositives permettant de créer des présentations impress.js."
     },
     "maintainer": {
         "name": "zamentur",
