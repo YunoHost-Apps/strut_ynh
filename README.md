@@ -3,11 +3,13 @@
 [![Integration level](https://dash.yunohost.org/integration/strut.svg)](https://dash.yunohost.org/appci/app/strut)  
 [![Install Strut with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=strut)
 
+*[Lire ce readme en français.](./README_fr.md)*
+
 > *This package allow you to install Strut quickly and simply on a YunoHost server.  
 If you don't have YunoHost, please see [here](https://yunohost.org/#/install) to know how to install and enjoy it.*
 
 ## Overview
-Quick description of this app.
+Strut is an HTML/JS slide presentation editor. It work with [impress.js](http://bartaz.github.com/impress.js/#/bored).
 
 **Shipped version:** 20171224-1
 
@@ -20,6 +22,8 @@ Quick description of this app.
 * [Official demo](http://strut.io/editor/index.html)
 
 ## Configuration
+
+If configuration is needed, feel free to contribute.
 
 ## Documentation
 
@@ -36,6 +40,7 @@ Quick description of this app.
 * Jessie x86-64b - [![Build Status](https://ci-stretch.nohost.me/ci/logs/strut%20%28Apps%29.svg)](https://ci-stretch.nohost.me/ci/apps/strut/)
 
 ## Limitations
+No import/export from/to OpenDocument or pptx.
 
 ## Additional information
 
