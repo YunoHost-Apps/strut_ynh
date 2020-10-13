@@ -1,13 +1,13 @@
 # Strut for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/strut.svg)](https://dash.yunohost.org/appci/app/strut)  
+[![Integration level](https://dash.yunohost.org/integration/strut.svg)](https://dash.yunohost.org/appci/app/strut) ![](https://ci-apps.yunohost.org/ci/badges/strut.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/strut.maintain.svg)  
 [![Install Strut with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=strut)
 
 > *This package allow you to install Strut quickly and simply on a YunoHost server.  
 If you don't have YunoHost, please see [here](https://yunohost.org/#/install) to know how to install and enjoy it.*
 
 ## Overview
-Quick description of this app.
+Strut is a simple, online editor that doesn't even require registration to operate. Everything you do is recoverable and re-usable.
 
 **Shipped version:** 20171224-1
 
@@ -31,9 +31,8 @@ Quick description of this app.
 
 #### Supported architectures
 
-* x86-64b - [![Build Status](https://ci-apps.yunohost.org/ci/logs/strut%20%28Apps%29.svg)](https://ci-apps.yunohost.org/ci/apps/strut/)
+* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/strut%20%28Apps%29.svg)](https://ci-apps.yunohost.org/ci/apps/strut/)
 * ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/strut%20%28Apps%29.svg)](https://ci-apps-arm.yunohost.org/ci/apps/strut/)
-* Jessie x86-64b - [![Build Status](https://ci-stretch.nohost.me/ci/logs/strut%20%28Apps%29.svg)](https://ci-stretch.nohost.me/ci/apps/strut/)
 
 ## Limitations
 
@@ -54,10 +53,8 @@ To avoid to take time to build this html/js app, this package setups a builded v
 
 ---
 
-Developers info
-----------------
+## Developers info
 
-**Only if you want to use a testing branch for coding, instead of merging directly into master.**
 Please do your pull request to the [testing branch](https://github.com/YunoHost-Apps/strut_ynh/tree/testing).
 
 To try the testing branch, please proceed like that.
