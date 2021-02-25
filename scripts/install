@@ -94,12 +94,12 @@ find "$final_path" -type d -print0 | xargs -0 chmod 750
 #=================================================
 # SETUP SSOWAT
 #=================================================
-ynh_script_progression --message="Configuring SSOwat..."
+ynh_script_progression --message="Configuring permissions..."
 
 # Make app public if necessary
 if [ $is_public -eq 1 ]
 then
-    ynh_app_setting_set --app=$app --key=skipped_uris --value="/"
+	ynh_permission_update --permission="main" --add="visitors"
 fi
 
 #=================================================
