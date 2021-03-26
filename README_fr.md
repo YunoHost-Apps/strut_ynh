@@ -1,7 +1,7 @@
 # Strut pour YunoHost
 
 [![Niveau d'integration](https://dash.yunohost.org/integration/strut.svg)](https://dash.yunohost.org/appci/app/strut)  
-[![Installer Strut avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=strut)
+[![Installer Strut avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=strut)
 
 *[Read this readme in english.](./README.md)* 
 
@@ -62,10 +62,9 @@ Voici la version compilée https://github.com/tantaman/Strut/commits/6761b141ee7
  * Site web de YunoHost : https://yunohost.org/
 
 ---
-Informations pour les développeurs
-----------------
 
-**Seulement si vous voulez utiliser une branche de test pour le codage, au lieu de fusionner directement dans la banche principale.**
+## Informations pour les développeurs
+
 Merci de faire vos pull request sur la [branche testing](https://github.com/YunoHost-Apps/strut_ynh/tree/testing).
 
 Pour essayer la branche testing, procédez comme suit.
