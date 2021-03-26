@@ -13,7 +13,7 @@
         "fr": "Éditeur de diapositives permettant de créer des présentations impress.js."
     },
     "maintainer": {
-        "name": "zamentur",
+        "name": "ljf",
         "email": "ljf+yunohost@grimaud.me"
     },
     "multi_instance": true,

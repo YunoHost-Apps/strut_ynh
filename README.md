@@ -1,7 +1,9 @@
 # Strut for YunoHost
 
 [![Integration level](https://dash.yunohost.org/integration/strut.svg)](https://dash.yunohost.org/appci/app/strut) ![](https://ci-apps.yunohost.org/ci/badges/strut.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/strut.maintain.svg)  
-[![Install Strut with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=strut)
+[![Install Strut with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=strut)
+
+*[Lire ce readme en français.](./README_fr.md)*
 
 > *This package allow you to install Strut quickly and simply on a YunoHost server.  
 If you don't have YunoHost, please see [here](https://yunohost.org/#/install) to know how to install and enjoy it.*
@@ -21,6 +23,8 @@ Strut is a simple, online editor that doesn't even require registration to opera
 
 ## Configuration
 
+If configuration is needed, feel free to contribute.
+
 ## Documentation
 
  * YunoHost documentation: If specific documentation is needed, feel free to contribute.
@@ -35,6 +39,7 @@ Strut is a simple, online editor that doesn't even require registration to opera
 * ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/strut%20%28Apps%29.svg)](https://ci-apps-arm.yunohost.org/ci/apps/strut/)
 
 ## Limitations
+No import/export from/to OpenDocument or pptx.
 
 ## Additional information
 
