@@ -35,8 +35,8 @@ If configuration is needed, feel free to contribute.
 
 #### Supported architectures
 
-* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/strut%20%28Apps%29.svg)](https://ci-apps.yunohost.org/ci/apps/strut/)
-* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/strut%20%28Apps%29.svg)](https://ci-apps-arm.yunohost.org/ci/apps/strut/)
+* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/strut.svg)](https://ci-apps.yunohost.org/ci/apps/strut/)
+* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/strut.svg)](https://ci-apps-arm.yunohost.org/ci/apps/strut/)
 
 ## Limitations
 No import/export from/to OpenDocument or pptx.

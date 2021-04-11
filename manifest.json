@@ -38,8 +38,6 @@
                 "type": "boolean",
                 "default": true
             }
-
-
         ]
     }
 }
