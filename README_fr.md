@@ -6,7 +6,7 @@
 *[Read this readme in english.](./README.md)* 
 
 > *Ce package vous permet d'installer Strut rapidement et simplement sur un serveur YunoHost.
-Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l'installer et en profiter*
+Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/install) pour savoir comment l'installer et en profiter*
 
 ## Vue d'ensemble
 Strut est un éditeur WEB de présentations fonctionnant en HTML/JS. Tout se passe en local. Il fonctinne grâce à [impress.js](http://bartaz.github.com/impress.js/#/bored).
