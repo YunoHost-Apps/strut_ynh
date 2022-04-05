@@ -2,19 +2,27 @@
     "name": "Strut",
     "id": "strut",
     "packaging_format": 1,
-    "version": "20171224-1~ynh2",
-    "url": "http://strut.io",
-    "license": "AGPL-3.0",
-    "requirements": {
-        "yunohost": ">= 4.1.7"
-    },
     "description": {
         "en": "Slide editor for creating impress.js presentations.",
         "fr": "Éditeur de diapositives permettant de créer des présentations impress.js."
     },
+    "version": "20171224-1~ynh2",
+    "url": "http://strut.io",
+    "upstream": {
+        "license": "AGPL-3.0",
+        "website": "http://strut.io",
+        "demo": "http://strut.io/dist/",
+        "admindoc": "https://yunohost.org/packaging_apps",
+        "userdoc": "https://yunohost.org/apps",
+        "code": "https://some.forge.com/example/example"
+    },
+    "license": "AGPL-3.0",
     "maintainer": {
         "name": "ljf",
         "email": "ljf+yunohost@grimaud.me"
+    },
+    "requirements": {
+        "yunohost": ">= 4.3.0"
     },
     "multi_instance": true,
     "services": [
