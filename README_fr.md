@@ -14,7 +14,7 @@ Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour
 Strut est un éditeur WEB de présentations fonctionnant en HTML/JS. Tout se passe en local. Il fonctinne grâce à [impress.js](http://bartaz.github.com/impress.js/#/bored).
 
 
-**Version incluse :** 20171224-1~ynh2
+**Version incluse :** 20220404~ynh1
 
 **Démo :** http://strut.io/dist/
 
