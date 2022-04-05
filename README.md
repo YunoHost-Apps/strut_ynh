@@ -19,7 +19,7 @@ Strut is a simple, online editor that doesn't even require registration to opera
 
 ## Demo
 
-* [Official demo](http://strut.io/editor/index.html)
+* [Official demo](http://strut.io/dist/)
 
 ## Configuration
 
