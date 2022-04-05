@@ -3,10 +3,10 @@
     "id": "strut",
     "packaging_format": 1,
     "description": {
-        "en": "Slide editor for creating impress.js presentations.",
-        "fr": "Éditeur de diapositives permettant de créer des présentations impress.js."
+        "en": "Slide editor for creating impress.js presentations",
+        "fr": "Éditeur de diapositives permettant de créer des présentations impress.js"
     },
-    "version": "20171224-1~ynh2",
+    "version": "20220404~ynh1",
     "url": "http://strut.io",
     "upstream": {
         "license": "AGPL-3.0",
@@ -32,8 +32,7 @@
         "install" : [
             {
                 "name": "domain",
-                "type": "domain",
-                "example": "example.com"
+                "type": "domain"
             },
             {
                 "name": "path",
