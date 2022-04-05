@@ -41,9 +41,7 @@ To avoid to take time to build this html/js app, this package setups a builded v
 ## Documentation and resources
 
 * Official app website: http://strut.io
-* Official user documentation: https://yunohost.org/apps
-* Official admin documentation: https://yunohost.org/packaging_apps
-* Upstream app code repository: https://some.forge.com/example/example
+* Upstream app code repository: https://github.com/MohannadNaj/Strut
 * YunoHost documentation for this app: https://yunohost.org/app_strut
 * Report a bug: https://github.com/YunoHost-Apps/strut_ynh/issues
 

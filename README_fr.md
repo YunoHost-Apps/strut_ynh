@@ -42,9 +42,7 @@ Voici la version compilée https://github.com/tantaman/Strut/commits/6761b141ee7
 ## Documentations et ressources
 
 * Site officiel de l'app : http://strut.io
-* Documentation officielle utilisateur : https://yunohost.org/apps
-* Documentation officielle de l'admin : https://yunohost.org/packaging_apps
-* Dépôt de code officiel de l'app : https://some.forge.com/example/example
+* Dépôt de code officiel de l'app : https://github.com/MohannadNaj/Strut
 * Documentation YunoHost pour cette app : https://yunohost.org/app_strut
 * Signaler un bug : https://github.com/YunoHost-Apps/strut_ynh/issues
 
