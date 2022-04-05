@@ -12,9 +12,7 @@
         "license": "AGPL-3.0",
         "website": "http://strut.io",
         "demo": "http://strut.io/dist/",
-        "admindoc": "https://yunohost.org/packaging_apps",
-        "userdoc": "https://yunohost.org/apps",
-        "code": "https://some.forge.com/example/example"
+        "code": "https://github.com/MohannadNaj/Strut"
     },
     "license": "AGPL-3.0",
     "maintainer": {
