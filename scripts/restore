@@ -32,8 +32,6 @@ final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 #=================================================
 ynh_script_progression --message="Validating restoration parameters..." --weight=3
 
-ynh_webpath_available --domain=$domain --path_url=$path_url \
-	|| ynh_die --message="Path not available: ${domain}${path_url}"
 test ! -d $final_path \
 	|| ynh_die --message="There is already a directory: $final_path "
 
@@ -42,13 +40,22 @@ test ! -d $final_path \
 #=================================================
 # RESTORE THE NGINX CONFIGURATION
 #=================================================
+ynh_script_progression --message="Restoring the NGINX web server configuration..." --weight=1
 
 ynh_restore_file --origin_path="/etc/nginx/conf.d/$domain.d/$app.conf"
 
 #=================================================
+# RECREATE THE DEDICATED USER
+#=================================================
+ynh_script_progression --message="Recreating the dedicated system user..." --weight=1
+
+# Create the dedicated user (if not existing)
+ynh_system_user_create --username=$app --home_dir="$final_path"
+
+#=================================================
 # RESTORE THE APP MAIN DIR
 #=================================================
-ynh_script_progression --message="Restoring the app main directory..."
+ynh_script_progression --message="Restoring the app main directory..." --weight=1
 
 ynh_restore_file --origin_path="$final_path"
 
@@ -57,7 +64,7 @@ ynh_restore_file --origin_path="$final_path"
 #=================================================
 
 # Restore permissions on app files
-chown -R root:www-data "$final_path"
+chown -R $app:www-data "$final_path"
 chmod -R 640 "$final_path"
 find "$final_path" -type d -print0 | xargs -0 chmod 750
 
@@ -66,7 +73,7 @@ find "$final_path" -type d -print0 | xargs -0 chmod 750
 #=================================================
 # RELOAD NGINX
 #=================================================
-ynh_script_progression --message="Reloading NGINX web server..."
+ynh_script_progression --message="Reloading NGINX web server..." --weight=1
 
 ynh_systemd_action --service_name=nginx --action=reload
 

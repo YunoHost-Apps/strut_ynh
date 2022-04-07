@@ -27,9 +27,23 @@ final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 upgrade_type=$(ynh_check_app_version_changed)
 
 #=================================================
+# BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
+#=================================================
+ynh_script_progression --message="Backing up the app before upgrading (may take a while)..." --weight=6
+
+# Backup the current version of the app
+ynh_backup_before_upgrade
+ynh_clean_setup () {
+	# restore it if the upgrade fails
+	ynh_restore_upgradebackup
+}
+# Exit if an error occurs during the execution of the script
+ynh_abort_if_errors
+
+#=================================================
 # ENSURE DOWNWARD COMPATIBILITY
 #=================================================
-ynh_script_progression --message="Ensuring downward compatibility..."
+ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
 
 # If final_path doesn't exist, create it
 if [ -z "$final_path" ]; then
@@ -45,18 +59,12 @@ if ynh_legacy_permissions_exists; then
 fi
 
 #=================================================
-# BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
+# CREATE DEDICATED USER
 #=================================================
-ynh_script_progression --message="Backing up the app before upgrading (may take a while)..." --weight=6
+ynh_script_progression --message="Making sure dedicated system user exists..." --weight=1
 
-# Backup the current version of the app
-ynh_backup_before_upgrade
-ynh_clean_setup () {
-	# restore it if the upgrade fails
-	ynh_restore_upgradebackup
-}
-# Exit if an error occurs during the execution of the script
-ynh_abort_if_errors
+# Create a dedicated user (if not existing)
+ynh_system_user_create --username=$app --home_dir="$final_path"
 
 #=================================================
 # STANDARD UPGRADE STEPS
@@ -81,7 +89,7 @@ fi
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
-ynh_script_progression --message="Upgrading NGINX web server configuration..."
+ynh_script_progression --message="Upgrading NGINX web server configuration..." --weight=2
 
 # Create a dedicated nginx config
 ynh_add_nginx_config
@@ -106,14 +114,14 @@ fi
 #=================================================
 
 # Set permissions on app files
-chown -R root:www-data "$final_path"
+chown -R $app:www-data "$final_path"
 chmod -R 640 "$final_path"
 find "$final_path" -type d -print0 | xargs -0 chmod 750
 
 #=================================================
 # RELOAD NGINX
 #=================================================
-ynh_script_progression --message="Reloading NGINX web server..."
+ynh_script_progression --message="Reloading NGINX web server..." --weight=1
 
 ynh_systemd_action --service_name=nginx --action=reload
 

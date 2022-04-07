@@ -1,42 +1,28 @@
 # Strut pour YunoHost
 
-[![Niveau d'integration](https://dash.yunohost.org/integration/strut.svg)](https://dash.yunohost.org/appci/app/strut)  
+[![Niveau d'intégration](https://dash.yunohost.org/integration/strut.svg)](https://dash.yunohost.org/appci/app/strut) ![](https://ci-apps.yunohost.org/ci/badges/strut.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/strut.maintain.svg)  
 [![Installer Strut avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=strut)
 
-*[Read this readme in english.](./README.md)* 
+*[Read this readme in english.](./README.md)*
+*[Lire ce readme en français.](./README_fr.md)*
 
 > *Ce package vous permet d'installer Strut rapidement et simplement sur un serveur YunoHost.
-Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/install) pour savoir comment l'installer et en profiter*
+Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l'installer et en profiter.*
 
 ## Vue d'ensemble
+
 Strut est un éditeur WEB de présentations fonctionnant en HTML/JS. Tout se passe en local. Il fonctinne grâce à [impress.js](http://bartaz.github.com/impress.js/#/bored).
 
-**Version incluse :** 20171224-1
+
+**Version incluse :** 20220404~ynh1
+
+**Démo :** http://strut.io/dist/
 
 ## Captures d'écran
 
-![](https://f.cloud.github.com/assets/1009003/515405/f1003c6a-be74-11e2-84b9-14776c652afb.png)
+![](./doc/screenshots/f1003c6a-be74-11e2-84b9-14776c652afb.png)
 
-## Démo
-
-* [Démo officielle](http://strut.io/editor/index.html)
-
-## Configuration
-
-S'il y a une configuration possible, sentez vous libre d'y contribuer.
-
-## Documentation
-
- * S'il y a une documentation spéficique, sentez vous libre d'y contribuer.
-
-## Caractéristiques spécifiques à YunoHost
-
-#### Support multi-utilisateurs
-
-#### Architectures supportées
-
-* x86-64b - [![Build Status](https://ci-apps.yunohost.org/ci/logs/strut.svg)](https://ci-apps.yunohost.org/ci/apps/strut/)
-* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/strut.svg)](https://ci-apps-arm.yunohost.org/ci/apps/strut/)
+## Avertissements / informations importantes
 
 ## Limitations
 
@@ -53,14 +39,12 @@ Pour compiler le logiciel, cela nécessite grunt, ce qui ne peut pas être suppr
 Pour éviter de devoir générer cette application HTML/JS, ce package créé une version compilée de Strut avec le patch qui supprime les dépendances à Google Analytics et Imgur.
 Voici la version compilée https://github.com/tantaman/Strut/commits/6761b141ee7aa622916e2d23cced84ee95618cce. Ce n'est pas la version la plus récente.
 
-## Liens
+## Documentations et ressources
 
- * Signaler un bug : https://github.com/YunoHost-Apps/strut_ynh/issues
- * Site web de Strut : http://strut.io
- * Dépôt de Strut : https://github.com/MohannadNaj/Strut
- * Site web de YunoHost : https://yunohost.org/
-
----
+* Site officiel de l'app : http://strut.io
+* Dépôt de code officiel de l'app : https://github.com/MohannadNaj/Strut
+* Documentation YunoHost pour cette app : https://yunohost.org/app_strut
+* Signaler un bug : https://github.com/YunoHost-Apps/strut_ynh/issues
 
 ## Informations pour les développeurs
 
@@ -72,3 +56,5 @@ sudo yunohost app install https://github.com/YunoHost-Apps/strut_ynh/tree/testin
 ou
 sudo yunohost app upgrade strut -u https://github.com/YunoHost-Apps/strut_ynh/tree/testing --debug
 ```
+
+**Plus d'infos sur le packaging d'applications :** https://yunohost.org/packaging_apps
