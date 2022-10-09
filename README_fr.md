@@ -24,7 +24,8 @@ Strut est un éditeur WEB de présentations fonctionnant en HTML/JS. Tout se pas
 
 ## Captures d'écran
 
-![Capture d'écran de Strut](./doc/screenshots/f1003c6a-be74-11e2-84b9-14776c652afb.png)
+![Capture d'écran de Strut](./doc/screenshots/screenshot.gif)
+![Capture d'écran de Strut](./doc/screenshots/.DS_Store)
 
 ## Avertissements / informations importantes
 

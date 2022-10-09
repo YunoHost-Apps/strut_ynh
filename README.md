@@ -23,7 +23,8 @@ Strut is a simple, online editor that doesn't even require registration to opera
 
 ## Screenshots
 
-![Screenshot of Strut](./doc/screenshots/f1003c6a-be74-11e2-84b9-14776c652afb.png)
+![Screenshot of Strut](./doc/screenshots/screenshot.gif)
+![Screenshot of Strut](./doc/screenshots/.DS_Store)
 
 ## Disclaimers / important information
 
