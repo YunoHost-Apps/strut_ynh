@@ -16,14 +16,9 @@ source /usr/share/yunohost/helpers
 #=================================================
 ynh_script_progression --message="Setting up source files..." --weight=4
 
-# Download, check integrity, uncompress and patch the source from app.src
-# For this app sources are in app subdirectory 
-tmp_dir=$(mktemp -d)
+ynh_setup_source --dest_dir="$install_dir"
 
-ynh_setup_source --dest_dir="$tmp_dir"
-mv "$tmp_dir/dist" "$install_dir"
-
-ynh_secure_remove --file="$tmp_dir"
+chown -R $app:www-data "$install_dir"
 
 #=================================================
 # NGINX CONFIGURATION
@@ -42,17 +37,6 @@ ynh_add_nginx_config
 # Imgur is deactivated on the specific upstream selected, but this text is still here
 # Don't use a patch because it's minified js
 ynh_replace_string --match_string="are currently uploaded to imgur.*re working on changing this" --replace_string="size is limited" --target_file="$install_dir/scripts/amd-app.js"
-
-#=================================================
-# GENERIC FINALIZATION
-#=================================================
-# SECURE FILES AND DIRECTORIES
-#=================================================
-
-# Set permissions to app files
-chown -R $app:www-data "$install_dir"
-chmod -R 640 "$install_dir"
-find "$install_dir" -type d -print0 | xargs -0 chmod 750
 
 #=================================================
 # END OF SCRIPT
