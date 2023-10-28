@@ -21,7 +21,8 @@ ynh_script_progression --message="Setting up source files..." --weight=4
 tmp_dir=$(mktemp -d)
 
 ynh_setup_source --dest_dir="$tmp_dir"
-mv "$tmp_dir/dist"  "$install_dir"
+mv "$tmp_dir/dist" "$install_dir"
+
 ynh_secure_remove --file="$tmp_dir"
 
 #=================================================
