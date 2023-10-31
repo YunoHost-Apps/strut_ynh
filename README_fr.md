@@ -5,15 +5,16 @@ It shall NOT be edited by hand.
 
 # Strut pour YunoHost
 
-[![Niveau d'intégration](https://dash.yunohost.org/integration/strut.svg)](https://dash.yunohost.org/appci/app/strut) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/strut.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/strut.maintain.svg)  
+[![Niveau d’intégration](https://dash.yunohost.org/integration/strut.svg)](https://dash.yunohost.org/appci/app/strut) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/strut.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/strut.maintain.svg)
+
 [![Installer Strut avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=strut)
 
 *[Read this readme in english.](./README.md)*
 
-> *Ce package vous permet d'installer Strut rapidement et simplement sur un serveur YunoHost.
-Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l'installer et en profiter.*
+> *Ce package vous permet d’installer Strut rapidement et simplement sur un serveur YunoHost.
+Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l’installer et en profiter.*
 
-## Vue d'ensemble
+## Vue d’ensemble
 
 Strut est un éditeur WEB de présentations fonctionnant en HTML/JS. Tout se passe en local. Il fonctinne grâce à [impress.js](http://bartaz.github.com/impress.js/#/bored).
 
@@ -22,9 +23,9 @@ Strut est un éditeur WEB de présentations fonctionnant en HTML/JS. Tout se pas
 
 **Démo :** http://strut.io/dist/
 
-## Captures d'écran
+## Captures d’écran
 
-![Capture d'écran de Strut](./doc/screenshots/screenshot.gif)
+![Capture d’écran de Strut](./doc/screenshots/screenshot.gif)
 
 ## Avertissements / informations importantes
 
@@ -45,9 +46,9 @@ Voici la version compilée https://github.com/tantaman/Strut/commits/6761b141ee7
 
 ## Documentations et ressources
 
-* Site officiel de l'app : <http://strut.io>
-* Dépôt de code officiel de l'app : <https://github.com/MohannadNaj/Strut>
-* Documentation YunoHost pour cette app : <https://yunohost.org/app_strut>
+* Site officiel de l’app : <http://strut.io>
+* Dépôt de code officiel de l’app : <https://github.com/MohannadNaj/Strut>
+* YunoHost Store: <https://apps.yunohost.org/app/strut>
 * Signaler un bug : <https://github.com/YunoHost-Apps/strut_ynh/issues>
 
 ## Informations pour les développeurs
@@ -62,4 +63,4 @@ ou
 sudo yunohost app upgrade strut -u https://github.com/YunoHost-Apps/strut_ynh/tree/testing --debug
 ```
 
-**Plus d'infos sur le packaging d'applications :** <https://yunohost.org/packaging_apps>
+**Plus d’infos sur le packaging d’applications :** <https://yunohost.org/packaging_apps>

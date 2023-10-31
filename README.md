@@ -5,7 +5,8 @@ It shall NOT be edited by hand.
 
 # Strut for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/strut.svg)](https://dash.yunohost.org/appci/app/strut) ![Working status](https://ci-apps.yunohost.org/ci/badges/strut.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/strut.maintain.svg)  
+[![Integration level](https://dash.yunohost.org/integration/strut.svg)](https://dash.yunohost.org/appci/app/strut) ![Working status](https://ci-apps.yunohost.org/ci/badges/strut.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/strut.maintain.svg)
+
 [![Install Strut with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=strut)
 
 *[Lire ce readme en français.](./README_fr.md)*
@@ -42,7 +43,7 @@ To avoid to take time to build this html/js app, this package setups a builded v
 
 * Official app website: <http://strut.io>
 * Upstream app code repository: <https://github.com/MohannadNaj/Strut>
-* YunoHost documentation for this app: <https://yunohost.org/app_strut>
+* YunoHost Store: <https://apps.yunohost.org/app/strut>
 * Report a bug: <https://github.com/YunoHost-Apps/strut_ynh/issues>
 
 ## Developer info
