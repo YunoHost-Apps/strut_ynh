@@ -1,6 +1,0 @@
-SOURCE_URL=https://github.com/MohannadNaj/Strut/archive/467fcb8a6436c84f2acb8ffb31b954d5eb3655b8.tar.gz
-SOURCE_SUM=d138ec3116b507d1fc3608f0c8bbb7601a68824403cb20617a80af1906bff3ab
-SOURCE_SUM_PRG=sha256sum
-SOURCE_FORMAT=tar.gz
-SOURCE_IN_SUBDIR=true
-SOURCE_FILENAME=strut-20160915-3.tar.gz
