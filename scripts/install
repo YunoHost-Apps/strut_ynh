@@ -16,7 +16,11 @@ source /usr/share/yunohost/helpers
 #=================================================
 ynh_script_progression --message="Setting up source files..." --weight=4
 
-ynh_setup_source --dest_dir="$install_dir"
+tmp_dir=$(mktemp -d)
+ynh_setup_source --dest_dir="$tmp_dir"
+# Dist is the compiled version. Other directories are source code and tools to build the program
+cp -a "$tmp_dir/dist/."  "$install_dir/"
+ynh_secure_remove --file="$tmp_dir"
 
 chown -R $app:www-data "$install_dir"
 
