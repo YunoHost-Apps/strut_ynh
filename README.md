@@ -18,7 +18,7 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 
 Strut is a simple, online editor that doesn't even require registration to operate. Everything you do is recoverable and re-usable.
 
-**Shipped version:** 20220404~ynh1
+**Shipped version:** 20231204~ynh1
 
 **Demo:** http://strut.io/dist/
 

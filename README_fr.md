@@ -18,7 +18,7 @@ Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) po
 
 Strut est un éditeur WEB de présentations fonctionnant en HTML/JS. Tout se passe en local.
 
-**Version incluse :** 20220404~ynh1
+**Version incluse :** 20231204~ynh1
 
 **Démo :** http://strut.io/dist/
 
