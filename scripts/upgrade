@@ -29,7 +29,7 @@ then
 	# For this app sources are in app subdirectory 
 	tmp_dir=$(mktemp -d)
 
-	ynh_setup_source --dest_dir="$tmp_dir"
+	ynh_setup_source --dest_dir="$tmp_dir" --full_replace=1
 	# Dist is the compiled version. Other directories are source code and tools to build the program
 	cp -a "$tmp_dir/dist/."  "$install_dir/"
 	ynh_secure_remove --file="$tmp_dir"
