@@ -26,6 +26,10 @@ Strut is a simple, online editor that doesn't even require registration to opera
 
 ![Captura de pantalla de Strut](./doc/screenshots/screenshot.gif)
 
+## :red_circle: Debes considerar
+
+- **Upstream not maintained**: This software is not maintained anymore. Expect it to break down over time, be exposed to unfixed security breaches, etc.
+
 ## Documentación e recursos
 
 - Web oficial da app: <http://strut.io>
