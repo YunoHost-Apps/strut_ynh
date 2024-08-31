@@ -18,7 +18,7 @@ EZ editatu eskuz.
 
 Strut is a simple, online editor that doesn't even require registration to operate. Everything you do is recoverable and re-usable.
 
-**Paketatutako bertsioa:** 20231204~ynh1
+**Paketatutako bertsioa:** 20231204~ynh2
 
 **Demoa:** <http://strut.io/dist/>
 

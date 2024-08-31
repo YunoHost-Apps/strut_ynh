@@ -18,7 +18,7 @@ It shall NOT be edited by hand.
 
 Strut is a simple, online editor that doesn't even require registration to operate. Everything you do is recoverable and re-usable.
 
-**Shipped version:** 20231204~ynh1
+**Shipped version:** 20231204~ynh2
 
 **Demo:** <http://strut.io/dist/>
 

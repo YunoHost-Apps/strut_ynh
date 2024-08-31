@@ -18,7 +18,7 @@
 
 Strut is a simple, online editor that doesn't even require registration to operate. Everything you do is recoverable and re-usable.
 
-**分发版本：** 20231204~ynh1
+**分发版本：** 20231204~ynh2
 
 **演示：** <http://strut.io/dist/>
 

@@ -18,7 +18,7 @@ Il NE doit PAS être modifié à la main.
 
 Strut est un éditeur WEB de présentations fonctionnant en HTML/JS. Tout se passe en local.
 
-**Version incluse :** 20231204~ynh1
+**Version incluse :** 20231204~ynh2
 
 **Démo :** <http://strut.io/dist/>
 

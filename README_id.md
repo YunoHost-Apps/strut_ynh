@@ -18,7 +18,7 @@ Ini TIDAK boleh diedit dengan tangan.
 
 Strut is a simple, online editor that doesn't even require registration to operate. Everything you do is recoverable and re-usable.
 
-**Versi terkirim:** 20231204~ynh1
+**Versi terkirim:** 20231204~ynh2
 
 **Demo:** <http://strut.io/dist/>
 
