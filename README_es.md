@@ -5,7 +5,7 @@ No se debe editar a mano.
 
 # Strut para Yunohost
 
-[![Nivel de integración](https://dash.yunohost.org/integration/strut.svg)](https://ci-apps.yunohost.org/ci/apps/strut/) ![Estado funcional](https://ci-apps.yunohost.org/ci/badges/strut.status.svg) ![Estado En Mantención](https://ci-apps.yunohost.org/ci/badges/strut.maintain.svg)
+[![Nivel de integración](https://dash.yunohost.org/integration/strut.svg)](https://dash.yunohost.org/appci/app/strut) ![Estado funcional](https://ci-apps.yunohost.org/ci/badges/strut.status.svg) ![Estado En Mantención](https://ci-apps.yunohost.org/ci/badges/strut.maintain.svg)
 
 [![Instalar Strut con Yunhost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=strut)
 
@@ -18,7 +18,7 @@ No se debe editar a mano.
 
 Strut is a simple, online editor that doesn't even require registration to operate. Everything you do is recoverable and re-usable.
 
-**Versión actual:** 20231204~ynh2
+**Versión actual:** 20231204~ynh1
 
 **Demo:** <http://strut.io/dist/>
 

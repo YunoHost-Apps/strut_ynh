@@ -5,7 +5,7 @@
 
 # YunoHost 上的 Strut
 
-[![集成程度](https://dash.yunohost.org/integration/strut.svg)](https://ci-apps.yunohost.org/ci/apps/strut/) ![工作状态](https://ci-apps.yunohost.org/ci/badges/strut.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/strut.maintain.svg)
+[![集成程度](https://dash.yunohost.org/integration/strut.svg)](https://dash.yunohost.org/appci/app/strut) ![工作状态](https://ci-apps.yunohost.org/ci/badges/strut.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/strut.maintain.svg)
 
 [![使用 YunoHost 安装 Strut](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=strut)
 
@@ -18,7 +18,7 @@
 
 Strut is a simple, online editor that doesn't even require registration to operate. Everything you do is recoverable and re-usable.
 
-**分发版本：** 20231204~ynh2
+**分发版本：** 20231204~ynh1
 
 **演示：** <http://strut.io/dist/>
 
