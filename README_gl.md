@@ -5,7 +5,7 @@ NON debe editarse manualmente.
 
 # Strut para YunoHost
 
-[![Nivel de integración](https://dash.yunohost.org/integration/strut.svg)](https://dash.yunohost.org/appci/app/strut) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/strut.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/strut.maintain.svg)
+[![Nivel de integración](https://dash.yunohost.org/integration/strut.svg)](https://ci-apps.yunohost.org/ci/apps/strut/) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/strut.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/strut.maintain.svg)
 
 [![Instalar Strut con YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=strut)
 
