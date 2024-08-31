@@ -5,7 +5,7 @@ Il NE doit PAS être modifié à la main.
 
 # Strut pour YunoHost
 
-[![Niveau d’intégration](https://dash.yunohost.org/integration/strut.svg)](https://dash.yunohost.org/appci/app/strut) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/strut.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/strut.maintain.svg)
+[![Niveau d’intégration](https://dash.yunohost.org/integration/strut.svg)](https://ci-apps.yunohost.org/ci/apps/strut/) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/strut.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/strut.maintain.svg)
 
 [![Installer Strut avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=strut)
 
@@ -18,7 +18,7 @@ Il NE doit PAS être modifié à la main.
 
 Strut est un éditeur WEB de présentations fonctionnant en HTML/JS. Tout se passe en local.
 
-**Version incluse :** 20231204~ynh1
+**Version incluse :** 20231204~ynh2
 
 **Démo :** <http://strut.io/dist/>
 
