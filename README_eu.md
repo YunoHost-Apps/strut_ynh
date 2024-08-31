@@ -5,7 +5,7 @@ EZ editatu eskuz.
 
 # Strut YunoHost-erako
 
-[![Integrazio maila](https://dash.yunohost.org/integration/strut.svg)](https://dash.yunohost.org/appci/app/strut) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/strut.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/strut.maintain.svg)
+[![Integrazio maila](https://dash.yunohost.org/integration/strut.svg)](https://ci-apps.yunohost.org/ci/apps/strut/) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/strut.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/strut.maintain.svg)
 
 [![Instalatu Strut YunoHost-ekin](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=strut)
 
