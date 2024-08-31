@@ -4,8 +4,6 @@
 source /usr/share/yunohost/helpers
 
 #=================================================
-# STANDARD RESTORATION STEPS
-#=================================================
 # RESTORE THE NGINX CONFIGURATION
 #=================================================
 ynh_script_progression "Restoring the NGINX web server configuration..."
@@ -23,9 +21,6 @@ ynh_restore "$install_dir"
 # RESTORE USER RIGHTS
 #=================================================
 
-# Restore permissions on app files
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown -R $app:www-data "$install_dir"
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod -R 640 "$install_dir"
 find "$install_dir" -type d -print0 | xargs -0 chmod 750
 
 #=================================================

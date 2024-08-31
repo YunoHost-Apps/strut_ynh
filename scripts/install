@@ -14,9 +14,6 @@ ynh_setup_source --dest_dir="$tmp_dir"
 cp -a "$tmp_dir/dist/."  "$install_dir/"
 ynh_safe_rm "$tmp_dir"
 
-# Set permissions on app files
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown -R $app:www-data "$install_dir"
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod -R 640 "$install_dir"
 find "$install_dir" -type d -print0 | xargs -0 chmod 750
 
 #=================================================
@@ -24,11 +21,8 @@ find "$install_dir" -type d -print0 | xargs -0 chmod 750
 #=================================================
 ynh_script_progression "Configuring NGINX web server..."
 
-# Create a dedicated NGINX config
 ynh_config_add_nginx
 
-#=================================================
-# SPECIFIC SETUP
 #=================================================
 # PATCH SOURCE
 #=================================================
