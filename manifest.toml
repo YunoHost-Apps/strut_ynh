@@ -5,7 +5,7 @@ name = "Strut"
 description.en = "Slide editor for creating impress.js presentations"
 description.fr = "Éditeur de diapositives permettant de créer des présentations impress.js"
 
-version = "20231204~ynh1"
+version = "20231204~ynh2"
 
 maintainers = ["ljf"]
 
