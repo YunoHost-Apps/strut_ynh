@@ -1,3 +1,1 @@
-!dist/*~
-*.sw[op]
-.DS_Store
+!dist/
