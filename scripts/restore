@@ -22,9 +22,9 @@ ynh_restore "$install_dir"
 #=================================================
 
 # Restore permissions on app files
-#chown -R $app:www-data "$install_dir"
-#chmod -R 640 "$install_dir"
-#find "$install_dir" -type d -print0 | xargs -0 chmod 750
+chown -R $app:www-data "$install_dir"
+chmod -R 640 "$install_dir"
+find "$install_dir" -type d -print0 | xargs -0 chmod 750
 
 #=================================================
 # RELOAD NGINX
