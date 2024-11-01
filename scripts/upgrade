@@ -1,74 +1,59 @@
 #!/bin/bash
 
-#=================================================
-# GENERIC START
-#=================================================
-# IMPORT GENERIC HELPERS
-#=================================================
-
 # source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
-# CHECK VERSION
-#=================================================
-
-upgrade_type=$(ynh_check_app_version_changed)
-
-#=================================================
-# STANDARD UPGRADE STEPS
-#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 
-if [ "$upgrade_type" == "UPGRADE_APP" ]
+# FIXME: this is still supported but the recommendation is now to *always* re-setup the app sources wether or not the upstream sources changed
+if ynh_app_upstream_version_changed
 then
-	ynh_script_progression --message="Upgrading source files..." --weight=4
+	ynh_script_progression "Upgrading source files..."
 
 	# Download, check integrity, uncompress and patch the source from app.src
-	# For this app sources are in app subdirectory 
+	# For this app sources are in app subdirectory
+
 	tmp_dir=$(mktemp -d)
 
 	ynh_setup_source --dest_dir="$tmp_dir"
 	# Dist is the compiled version. Other directories are source code and tools to build the program
 	cp -a "$tmp_dir/dist/."  "$install_dir/"
-	ynh_secure_remove --file="$tmp_dir"
+	ynh_safe_rm "$tmp_dir"
 fi
 
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
-ynh_script_progression --message="Upgrading NGINX web server configuration..." --weight=2
+ynh_script_progression "Upgrading NGINX web server configuration..."
 
 # Create a dedicated nginx config
-ynh_add_nginx_config
+ynh_config_add_nginx
 
-#=================================================
-# SPECIFIC UPGRADE
 #=================================================
 # PATCH SOURCE
 #=================================================
 
-if [ "$upgrade_type" == "UPGRADE_APP" ]
+# FIXME: this is still supported but the recommendation is now to *always* re-setup the app sources wether or not the upstream sources changed
+if ynh_app_upstream_version_changed
 then
 	# Imgur is deactivated on the specific upstream selected, but this text is still here
 	# Don't use a patch because it's minified js
-	ynh_replace_string --match_string="are currently uploaded to imgur.*re working on changing this" --replace_string="size is limited" --target_file="$install_dir/scripts/amd-app.js"
+	ynh_replace --match="are currently uploaded to imgur.*re working on changing this" --replace="size is limited" --file="$install_dir/scripts/amd-app.js"
 fi
 
-#=================================================
-# GENERIC FINALIZATION
 #=================================================
 # SECURE FILES AND DIRECTORIES
 #=================================================
 
 # Set permissions on app files
-chown -R $app:www-data "$install_dir"
-chmod -R 640 "$install_dir"
+#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown -R $app:www-data "$install_dir"
+#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod -R 640 "$install_dir"
 find "$install_dir" -type d -print0 | xargs -0 chmod 750
 
 #=================================================
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression --message="Upgrade of $app completed" --last
+ynh_script_progression "Upgrade of $app completed"
