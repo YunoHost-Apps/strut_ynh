@@ -39,7 +39,7 @@ Strut is a simple, online editor that doesn't even require registration to opera
 
 ## Información para desarrolladores
 
-Por favor enviar sus correcciones a la [`branch testing`](https://github.com/YunoHost-Apps/strut_ynh/tree/testing
+Por favor enviar sus correcciones a la [rama `testing`](https://github.com/YunoHost-Apps/strut_ynh/tree/testing).
 
 Para probar la rama `testing`, sigue asÍ:
 
