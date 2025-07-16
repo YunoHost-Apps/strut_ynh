@@ -10,7 +10,6 @@ ynh_script_progression "Upgrading source files..."
 
 # Download, check integrity, uncompress and patch the source from app.src
 # For this app sources are in app subdirectory
-
 tmp_dir=$(mktemp -d)
 
 ynh_setup_source --dest_dir="$tmp_dir"
