@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# source _common.sh
+source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
@@ -8,10 +8,12 @@ source /usr/share/yunohost/helpers
 #=================================================
 ynh_script_progression "Upgrading source files..."
 
+# Download, check integrity, uncompress and patch the source from app.src
+# For this app sources are in app subdirectory
 tmp_dir=$(mktemp -d)
 
 ynh_setup_source --dest_dir="$tmp_dir"
-
+# Dist is the compiled version. Other directories are source code and tools to build the program
 cp -a "$tmp_dir/dist/."  "$install_dir/"
 ynh_safe_rm "$tmp_dir"
 
@@ -25,6 +27,7 @@ ynh_config_add_nginx
 #=================================================
 # PATCH SOURCE
 #=================================================
+
 # Imgur is deactivated on the specific upstream selected, but this text is still here
 # Don't use a patch because it's minified js
 ynh_replace --match="are currently uploaded to imgur.*re working on changing this" --replace="size is limited" --file="$install_dir/scripts/amd-app.js"
@@ -33,6 +36,9 @@ ynh_replace --match="are currently uploaded to imgur.*re working on changing thi
 # SECURE FILES AND DIRECTORIES
 #=================================================
 
+# Set permissions on app files
+chown -R $app:www-data "$install_dir"
+chmod -R 640 "$install_dir"
 find "$install_dir" -type d -print0 | xargs -0 chmod 750
 
 #=================================================
